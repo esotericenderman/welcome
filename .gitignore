@@ -123,3 +123,7 @@ build
 
 # .class files
 bin
+
+# Gradle wrapper
+gradlew
+gradlew.bat
