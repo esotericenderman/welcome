@@ -6,7 +6,7 @@
 
 > A commissioned Minecraft plugin that displays a title and changing subtitle when a player joins the server. 
 
-![Demonstration video](./assets/videos/demo.mp4)
+![Demonstration video](https://github.com/esotericenderman/welcome/raw/refs/heads/master/assets/videos/demo.mp4)
 
 ## License
 
