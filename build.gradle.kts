@@ -15,7 +15,7 @@ plugins {
 description = "A plugin to display a title and a changing subtitle."
 
 group = "dev.enderman"
-version = "0.0.13"
+version = "0.0.14"
 
 val javaVersion = 17
 val javaVersionEnum = JavaVersion.valueOf("VERSION_$javaVersion")
