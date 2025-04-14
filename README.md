@@ -6,6 +6,8 @@
 
 > A commissioned Minecraft plugin that displays a title and changing subtitle when a player joins the server. 
 
+![Demonstration video](./assets/videos/demo.mp4)
+
 ## License
 
 &copy; 2024-2025 [Esoteric Enderman](https://enderman.dev)
