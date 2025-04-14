@@ -16,9 +16,9 @@ import org.checkerframework.framework.qual.DefaultQualifier;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.title.Title;
 import net.kyori.adventure.title.TitlePart;
-import net.md_5.bungee.api.ChatColor;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -53,9 +53,9 @@ public final class WelcomePlugin extends JavaPlugin implements Listener {
 
     FileConfiguration configuration = getConfig();
 
-    titleComponent = Component.text(ChatColor.translateAlternateColorCodes('&', configuration.getString("title", "Title (can be changed in config.yml)")));
+    titleComponent = LegacyComponentSerializer.legacy(LegacyComponentSerializer.AMPERSAND_CHAR).deserialize(configuration.getString("title", "Title (can be changed in config.yml)"));
     changingSubtitleComponents = Stream.of((configuration.getList("subtitle", List.of())).toArray(String[]::new))
-        .map((string) -> Component.text(ChatColor.translateAlternateColorCodes('&', string))).toList();
+        .map((string) -> LegacyComponentSerializer.legacy(LegacyComponentSerializer.AMPERSAND_CHAR).deserialize(string)).toList();
     secondsBeforeChanging = configuration.getLong("seconds-before-changing", 5L);
 
     firstSubtitleFadeInTime = configuration.getLong("first-subtitle-fade-in-time", 0L);
