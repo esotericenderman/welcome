@@ -8,6 +8,8 @@
 
 ![Demonstration video](./assets/gifs/demo.gif)
 
+Titles, subtitles and durations are all fully configurable. See [config.yml](./src/main/resources/config.yml) for details.
+
 ## License
 
 &copy; 2024-2025 [Esoteric Enderman](https://enderman.dev)
