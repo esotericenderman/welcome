@@ -12,66 +12,38 @@ plugins {
   id("xyz.jpenilla.run-paper") version "2.3.0"
 }
 
-val groupStringSeparator = "."
-val kebabcaseStringSeparator = "-"
-val snakecaseStringSeparator = "_"
-
-fun kebabcase(normalString: String): String {
-  return normalString.lowercase().replace(" ", kebabcaseStringSeparator)
-}
-
-fun capitalizeFirstLetter(string: String): String {
-  return string.first().uppercase() + string.slice(IntRange(1, string.length - 1))
-}
-
-fun snakecase(kebabcaseString: String): String {
-  return kebabcaseString.lowercase().replace(kebabcaseStringSeparator, snakecaseStringSeparator)
-}
-
-fun pascalcase(kebabcaseString: String): String {
-  var pascalCaseString = ""
-
-  val splitString = kebabcaseString.split(kebabcaseStringSeparator)
-
-  for (part in splitString) {
-    pascalCaseString += capitalizeFirstLetter(part)
-  }
-
-  return pascalCaseString
-}
-
 description = "A plugin to display a title and a changing subtitle."
 
-val mainProjectAuthor = "Esoteric Enderman"
-val projectAuthors = listOfNotNull(mainProjectAuthor)
-
-val topLevelDomain = "dev"
-
-val projectNameString = rootProject.name
-
-group = topLevelDomain + groupStringSeparator + "enderman"
+group = "dev.enderman"
 version = "0.0.13"
 
-val buildDirectoryString = buildDir.toString()
-
-val projectGroupString = group.toString()
-val projectVersionString = version.toString()
-
 val javaVersion = 17
-val javaVersionEnumMember = JavaVersion.valueOf("VERSION_$javaVersion")
+val javaVersionEnum = JavaVersion.valueOf("VERSION_$javaVersion")
 
-val paperApiMinecraftVersion = "1.20"
-val paperApiVersion = "$paperApiMinecraftVersion-R0.1-SNAPSHOT"
+val minecraftVersion = "1.20"
+val apiVersion = "$minecraftVersion-R0.1-SNAPSHOT"
 
 java {
-  sourceCompatibility = javaVersionEnumMember
-  targetCompatibility = javaVersionEnumMember
+  sourceCompatibility = javaVersionEnum
+  targetCompatibility = javaVersionEnum
 
   toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
 }
 
 dependencies {
-  paperweight.paperDevBundle(paperApiVersion)
+  paperweight.paperDevBundle(apiVersion)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+
+            groupId = group.toString()
+            artifactId = rootProject.name
+            version = project.version.toString()
+        }
+    }
 }
 
 tasks {
@@ -82,31 +54,19 @@ tasks {
   javadoc {
     options.encoding = Charsets.UTF_8.name()
   }
+
+  named("publishMavenJavaPublicationToMavenLocal") {
+    dependsOn(build)
+  }
 }
 
 bukkitPluginYaml {
   name = "Welcome"
   description = project.description
-  authors = projectAuthors
+  authors = listOf("Esoteric Enderman")
 
   version = project.version.toString()
-  apiVersion = paperApiMinecraftVersion
-  main = projectGroupString + groupStringSeparator + "commissions.minecraft.plugins.welcome" + groupStringSeparator + pascalcase(projectNameString) + "Plugin"
+  apiVersion = minecraftVersion
+  main = group.toString() + ".commissions.minecraft.plugins.welcome." + "${name.get()}Plugin"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-
-            groupId = projectGroupString
-            artifactId = projectNameString
-            version = projectVersionString
-        }
-    }
-}
-
-tasks.named("publishMavenJavaPublicationToMavenLocal") {
-  dependsOn(tasks.named("build"))
 }
