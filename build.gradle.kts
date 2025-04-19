@@ -15,7 +15,7 @@ plugins {
 description = "A plugin to display a title and a changing subtitle."
 
 group = "dev.enderman"
-version = "0.0.14"
+version = "0.0.15"
 
 val javaVersion = 17
 val javaVersionEnum = JavaVersion.valueOf("VERSION_$javaVersion")
@@ -64,6 +64,7 @@ bukkitPluginYaml {
   name = "Welcome"
   description = project.description
   authors = listOf("Esoteric Enderman")
+  website = "https://github.com/esotericenderman/welcome"
 
   version = project.version.toString()
   apiVersion = minecraftVersion
