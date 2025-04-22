@@ -1,6 +1,6 @@
 # Welcome
 
-<sup>Generated from [esoterictemplates/template-paper-plugin](https://github.com/esoterictemplates/template-paper-plugin)</sup>
+<sup>Generated from [Esoteric Templates / Template Paper Plugin](https://github.com/esoterictemplates/template-paper-plugin)</sup>
 
 [![Project status: completed](./assets/images/badges/status.svg)](./)
 
